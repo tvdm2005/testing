@@ -1,0 +1,11 @@
+# <type>(<scope>): korte beschrijving   (zie 2.2 en 2.3)
+# |<------ max 72 tekens per regel (ook in de body) ------------------>|
+
+# Waarom is deze wijziging nodig?
+# Wat doet het?
+
+# Footer: issue verplicht, breaking change optioneel
+# Refs #42      <- hoort bij issue, issue nog niet af
+# Closes #42    <- deze commit maakt het issue af
+# BREAKING CHANGE: <wat niet meer compatibel is>
+# Regels die met # beginnen worden weggehaald.

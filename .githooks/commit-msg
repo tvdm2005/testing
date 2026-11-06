@@ -1,0 +1,30 @@
+#!/bin/sh
+# Controleert het commitformaat uit CONTRIBUTING.md §2.
+
+types='feat|fix|docs|test|refactor|perf|chore|ci'
+scopes='world|characters|agents|scripting|network|ui|save|core|chat|deps|adr'
+
+msg=$(grep -v '^#' "$1")
+header=$(printf '%s\n' "$msg" | head -n1)
+
+fail() { echo "✖ $1" >&2; exit 1; }
+
+case "$header" in
+  Merge*|Revert*|fixup!*|squash!*|amend!*) exit 0 ;;
+esac
+
+printf '%s\n' "$header" | grep -Eq "^($types)(\(($scopes)\))?!?: .+" \
+  || fail "Regel 1 moet zijn: <type>(<scope>): beschrijving
+  types:  $types
+  scopes: $scopes"
+
+printf '%s\n' "$msg" | awk 'length > 72 { exit 1 }' \
+  || fail "Een of meer regels zijn langer dan 72 tekens"
+
+printf '%s\n' "$msg" | sed -n 2p | grep -q . \
+  && fail "Regel 2 moet leeg zijn"
+
+printf '%s\n' "$msg" | grep -Eq '^(Refs|Closes) #[0-9]+' \
+  || fail "Issueverwijzing ontbreekt: Refs #<nr> of Closes #<nr>"
+
+exit 0

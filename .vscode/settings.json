@@ -1,0 +1,10 @@
+{
+  "git.branchPrefix": "feature/",
+  "git.branchValidationRegex": "^(feature|fix|refactor|docs|chore|hotfix)/[0-9]+-[a-z0-9-]+$",
+  "git.pruneOnFetch": true,
+  "git.rebaseWhenSync": true,
+  "git.allowNoVerifyCommit": false,
+  "git.inputValidation": true,
+  "git.inputValidationSubjectLength": 72,
+  "git.inputValidationLength": 72
+}
